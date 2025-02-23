@@ -51,7 +51,8 @@ export default {
     // Aksi ketika klik Edit
     const editProject = (id) => {
       console.log(`Edit project ${id}`);
-      alert(`Edit project ${id}`); // Gantilah dengan routing atau modal edit
+      //alert(`Edit project ${id}`); // Gantilah dengan routing atau modal edit
+      window.location.href = `/projects/edit/${id}`;
     };
 
     // Aksi ketika klik Delete

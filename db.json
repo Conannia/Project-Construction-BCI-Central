@@ -1,28 +1,45 @@
 {
-    "users": [
-      { "id": 1, "email": "admin@example.com", "password": "123456" }
-    ],
-    "projects": [ {
-        "id": "100001",
-        "name": "Office Tower A",
-        "stage": "Design",
-        "category": "Office",
-        "startDate": "2025-01-01"
-      },
-      {
-        "id": "100002",
-        "name": "Shopping Mall B",
-        "stage": "Construction",
-        "category": "Retail",
-        "startDate": "2024-06-15"
-      },
-      {
-        "id": "100003",
-        "name": "Residential Complex C",
-        "stage": "Planning",
-        "category": "Residential",
-        "startDate": "2024-09-10"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@example.com",
+      "password": "123456"
+    }
+  ],
+  "projects": [
+    {
+      "id": "100002",
+      "name": "Shopping Mall B",
+      "stage": "Construction",
+      "category": "Retail",
+      "startDate": "2024-06-15"
+    },
+    {
+      "id": "100003",
+      "name": "Residential Complex C",
+      "stage": "Planning",
+      "category": "Residential",
+      "startDate": "2024-09-10"
+    },
+    {
+      "id": "159984",
+      "name": "Test 2",
+      "location": "Jakarta",
+      "stage": "Concept",
+      "category": "Education",
+      "startDate": "2025-02-27",
+      "details": "ini test",
+      "creatorId": "qwqw"
+    },
+    {
+      "id": "367155",
+      "name": "Ini test Tapi saya tidak Paham",
+      "location": "Ini test",
+      "stage": "Concept",
+      "category": "Education",
+      "startDate": "2025-02-28",
+      "details": "Ga ngerti gw",
+      "creatorId": "Ini test"
+    }
+  ]
+}

@@ -1,12 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginPage from '../pages/loginPages.vue'; // Perbaiki path sesuai struktur
+import LoginPage from '../pages/loginPages.vue';
 import HomePage from '../pages/projectList.vue';
-import projectForm from '../pages/projectForm.vue'; // Misalnya ini halaman utama
+import ProjectForm from '../pages/projectForm.vue';
+import EditProject from '../pages/editProject.vue'; // Perbaiki nama
 
 const routes = [
-  { path: '/projects', component: HomePage }, // Halaman utama
-  { path: '/', component: LoginPage },
-  {path: '/projects/new', component: projectForm} // Halaman login
+  { path: '/login', component: LoginPage }, // Halaman login
+  { path: '/', component: HomePage }, 
+  { path: '/projects', component: HomePage }, // Halaman daftar proyek
+  { path: '/projects/new', component: ProjectForm }, // Halaman tambah proyek
+  { 
+    path: '/projects/edit/:id', 
+    name: 'EditProject',
+    component: EditProject,
+    props: true // Mengizinkan ID dikirim sebagai prop
+  }
 ];
 
 const router = createRouter({
