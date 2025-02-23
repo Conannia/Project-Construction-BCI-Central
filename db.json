@@ -2,6 +2,27 @@
     "users": [
       { "id": 1, "email": "admin@example.com", "password": "123456" }
     ],
-    "projects": []
+    "projects": [ {
+        "id": "100001",
+        "name": "Office Tower A",
+        "stage": "Design",
+        "category": "Office",
+        "startDate": "2025-01-01"
+      },
+      {
+        "id": "100002",
+        "name": "Shopping Mall B",
+        "stage": "Construction",
+        "category": "Retail",
+        "startDate": "2024-06-15"
+      },
+      {
+        "id": "100003",
+        "name": "Residential Complex C",
+        "stage": "Planning",
+        "category": "Residential",
+        "startDate": "2024-09-10"
+      }
+    ]
   }
   
