@@ -66,7 +66,7 @@ export default {
     // Fetch project data from API
     const fetchProject = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/projects/${projectId.value}`);
+        const response = await fetch(`http://localhost:5030/projects/${projectId.value}`);
         if (!response.ok) throw new Error("Project not found");
         project.value = await response.json();
       } catch (error) {
@@ -78,7 +78,7 @@ export default {
     // Update project data
     const updateProject = async () => {
       try {
-        await fetch(`http://localhost:3000/projects/${projectId.value}`, {
+        await fetch(`http://localhost:5030/projects/${projectId.value}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(project.value),

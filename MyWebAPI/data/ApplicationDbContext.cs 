@@ -1,0 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<Project> Projects { get; set; }
+}
+
+// Model User
+public class User
+{
+    public int Id { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+
+// Model Project
+public class Project
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Stage { get; set; }
+    public string Category { get; set; }
+    public DateTime StartDate { get; set; }
+}

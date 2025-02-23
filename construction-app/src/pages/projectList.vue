@@ -39,13 +39,17 @@ export default {
     const projects = ref([]);
 
     // Fetch data dari API JSON Server
+    
     const fetchProjects = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/projects");
+    try {
+        const response = await fetch("http://localhost:5030/projects"); // Sesuaikan dengan port backend
+        if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         projects.value = await response.json();
-      } catch (error) {
+    } catch (error) {
         console.error("Error fetching projects:", error);
-      }
+    }
     };
 
     // Aksi ketika klik Edit
@@ -60,7 +64,7 @@ export default {
       if (!confirm(`Are you sure you want to delete project ${id}?`)) return;
 
       try {
-        await fetch(`http://localhost:3000/projects/${id}`, {
+        await fetch(`http://localhost:5030/projects/${id}`, {
           method: "DELETE",
         });
         projects.value = projects.value.filter((p) => p.id !== id);
