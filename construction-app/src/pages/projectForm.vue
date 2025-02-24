@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Construction Project Details – Create Page</h1>
-    <form @submit.prevent="submitProject">
+  <div style="background: beige; margin: 1% 10%;">
+    <h1 style="text-align: center;">Construction Project Details – Create Page</h1>
+    <form @submit.prevent="submitProject" style="margin: 1% 10%; justify-self: anchor-center; width: 50vw;">
       <label>Project ID:</label>
       <input type="text" v-model="project.id" disabled />
 

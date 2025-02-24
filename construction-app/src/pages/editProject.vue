@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: beige;">
     <h1>Edit Project</h1>
     <p>Editing Project ID: {{ projectId }}</p>
 

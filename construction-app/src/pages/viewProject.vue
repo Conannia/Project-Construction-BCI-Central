@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: beige;">
     <h1>View Project</h1>
     <p>View Project ID: {{ projectId }}</p>
 
@@ -38,6 +38,7 @@
 
       <label>Project Details:</label>
       <textarea v-model="project.details" rows="4" readonly></textarea>
+      <button type="button" @click="$router.push('/')">Back</button>
     </form>
   </div>
 </template>
@@ -138,7 +139,7 @@ textarea:focus {
 
 /* Button Styling */
 button {
-  width: 48%;
+  width: 100%;
   padding: 10px;
   margin-top: 10px;
   border: none;
@@ -155,10 +156,7 @@ button[type="submit"] {
 }
 
 /* Cancel Button */
-button[type="button"] {
-  background: #dc3545;
-  color: white;
-}
+
 
 /* Button Hover Effects */
 button:hover {
@@ -179,6 +177,17 @@ button + button {
     width: 100%;
     margin: 5px 0;
   }
+}
+button {
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
 }
 </style>
 

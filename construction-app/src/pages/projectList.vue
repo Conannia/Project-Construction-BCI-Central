@@ -1,35 +1,39 @@
 <template>
-  <div>
-    <h1>Construction Projects</h1>
-    <button @click="$router.push('/projects/new')">Create Project</button>
+  <div style="background: beige; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <h1 style="font-size: 28px; font-weight: bold; margin-bottom: 20px;">Construction Projects</h1>
+    <button @click="$router.push('/projects/new')" 
+      style="background: #87CEEB; color: white; padding: 12px 20px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+      Create Project
+    </button>
     
-    <table border="1" style="width: 100%; margin-top: 10px; border-collapse: collapse;">
-      <thead>
-        <tr>
-          <th>Project ID</th>
-          <th>Project Name</th>
-          <th>Stage</th>
-          <th>Category</th>
-          <th>Start Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="project in projects" :key="project.id">
-          <td>{{ project.id }}</td>
-          <td>{{ project.name }}</td>
-          <td>{{ project.stage }}</td>
-          <td>{{ project.category }}</td>
-          <td>{{ formatDate(project.startDate) }}</td>
-          <td>
-            <button @click="viewProject(project.id)">View</button>
-            <button @click="editProject(project.id)">Edit</button>
-            <button @click="deleteProject(project.id)" style="margin-left: 5px;">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <table border="1" style="width: 100%; margin-top: 10px; border-collapse: collapse; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+    <thead >
+      <tr style="background: #4CAF50; color: black;">
+        <th style="padding: 10px; text-align: left;">Project ID</th>
+        <th style="padding: 10px; text-align: left;">Project Name</th>
+        <th style="padding: 10px; text-align: left;">Stage</th>
+        <th style="padding: 10px; text-align: left;">Category</th>
+        <th style="padding: 10px; text-align: left;">Start Date</th>
+        <th style="padding: 10px; text-align: center;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="project in projects" :key="project.id" style="background: #f9f9f9; border-bottom: 1px solid #ddd;">
+        <td style="padding: 8px;">{{ project.id }}</td>
+        <td style="padding: 8px;">{{ project.name }}</td>
+        <td style="padding: 8px;">{{ project.stage }}</td>
+        <td style="padding: 8px;">{{ project.category }}</td>
+        <td style="padding: 8px;">{{ formatDate(project.startDate) }}</td>
+        <td style="padding: 8px; text-align: center;">
+          <button @click="viewProject(project.id)" style="background: #2196F3; color: white; border: none; padding: 6px 10px; margin: 3px; border-radius: 4px; cursor: pointer;">View</button>
+          <button @click="editProject(project.id)" style="background: #FFC107; color: white; border: none; padding: 6px 10px; margin: 3px; border-radius: 4px; cursor: pointer;">Edit</button>
+          <button @click="deleteProject(project.id)" style="background: #F44336; color: white; border: none; padding: 6px 10px; margin: 3px; border-radius: 4px; cursor: pointer;">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   </div>
+  <div style="background: beige; height: 10vh"></div>
 </template>
 
 <script>
@@ -97,6 +101,9 @@ export default {
 </script>
 
 <style scoped>
+h1{
+display: center;
+}
 table {
   width: 100%;
   border-collapse: collapse;

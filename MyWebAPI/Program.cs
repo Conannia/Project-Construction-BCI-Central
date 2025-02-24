@@ -6,16 +6,16 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")  // Sesuaikan dengan port frontend Anda
+        policy.WithOrigins("http://localhost:5173")  
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
 
-// 🔹 Ambil connection string dari appsettings.json
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// 🔹 Tambahkan DbContext untuk MySQL
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
@@ -26,8 +26,8 @@ builder.Services.AddControllers();
 
 
 var app = builder.Build();
-// Configure the HTTP request pipeline.
-app.UseCors("AllowLocalhost");  // Gunakan policy CORS yang telah ditentukan
+
+app.UseCors("AllowLocalhost");  
 
 app.MapControllers();
 
@@ -39,7 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 🔹 Endpoint untuk mengambil data users
+
 app.MapGet("/users", async (ApplicationDbContext db) =>
 {
     return await db.Users.ToListAsync();
@@ -50,7 +50,7 @@ app.MapGet("/projects", async (ApplicationDbContext db) =>
     return await db.Projects.ToListAsync();
 });
 
-// 🔹 Endpoint untuk menambahkan user baru
+
 app.MapPost("/users", async (ApplicationDbContext db, User user) =>
 {
     db.Users.Add(user);
