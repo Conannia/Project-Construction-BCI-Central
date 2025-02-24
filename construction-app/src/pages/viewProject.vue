@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1>Edit Project</h1>
-    <p>Editing Project ID: {{ projectId }}</p>
+    <h1>View Project</h1>
+    <p>View Project ID: {{ projectId }}</p>
 
     <form @submit.prevent="updateProject">
       <label>Project Name:</label>
-      <input type="text" v-model="project.name" required />
+      <input type="text" v-model="project.name" readonly />
 
       <label>Project Location:</label>
-      <input type="text" v-model="project.location" required />
+      <input type="text" v-model="project.location" readonly />
 
       <label>Project Stage:</label>
-      <select v-model="project.stage">
+      <select v-model="project.stage" disabled>
         <option>Concept</option>
         <option>Design & Documentation</option>
         <option>Pre-Construction</option>
@@ -19,7 +19,7 @@
       </select>
 
       <label>Project Category:</label>
-      <select v-model="project.category">
+      <select v-model="project.category" disabled>
         <option>Education</option>
         <option>Health</option>
         <option>Office</option>
@@ -30,22 +30,20 @@
         type="text"
         v-model="project.otherCategory"
         placeholder="Enter other category"
+        readonly
       />
 
       <label>Start Date:</label>
-      <input type="text" v-model="formattedStartDate" required />
+      <input type="text" v-model="formattedStartDate" readonly />
 
       <label>Project Details:</label>
-      <textarea v-model="project.details" rows="4"></textarea>
-
-      <button type="submit">Update Project</button>
-      <button type="button" @click="goBack">Cancel</button>
+      <textarea v-model="project.details" rows="4" readonly></textarea>
     </form>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 export default {
@@ -75,25 +73,7 @@ export default {
       }
     };
 
-    // Update project data
-    const updateProject = async () => {
-      try {
-        await fetch(`http://localhost:5030/projects/${projectId.value}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(project.value),
-        });
-        alert("Project updated successfully!");
-        router.push("/");
-      } catch (error) {
-        console.error(error);
-        alert("Failed to update project");
-      }
-    };
-
-    const goBack = () => router.push("/");
-
-
+    
     const formattedStartDate = computed(() => {
       if (!project.value.startDate) return "";
       const date = new Date(project.value.startDate);
@@ -105,10 +85,9 @@ export default {
 
     onMounted(fetchProject);
 
-    return { projectId, formattedStartDate, project, updateProject, goBack };
+    return { projectId, project, formattedStartDate };
   },
 };
-
 </script>
 <style scoped>
 /* Container Styling */

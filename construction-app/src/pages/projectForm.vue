@@ -40,7 +40,7 @@
       <textarea v-model="project.details" maxlength="2000"></textarea>
 
       <label>Project Creator ID (UserID):</label>
-      <input type="text" v-model="project.creatorId" required />
+      <input type="text" v-model="project.creatorId" readonly />
 
       <button type="submit">Create Project</button>
       <button type="button" @click="$router.push('/')">Cancel</button>
@@ -102,6 +102,12 @@ export default {
         console.error("Error creating project:", error);
       }
     }
+
+
+    onMounted(() => {
+      // Ambil userId dari sessionStorage dan set ke project.creatorId
+      project.value.creatorId = sessionStorage.getItem("userId") || "Unknown";
+    });
 
     return { project, checkOtherCategory, submitProject };
   },

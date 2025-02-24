@@ -20,8 +20,9 @@
           <td>{{ project.name }}</td>
           <td>{{ project.stage }}</td>
           <td>{{ project.category }}</td>
-          <td>{{ project.startDate }}</td>
+          <td>{{ formatDate(project.startDate) }}</td>
           <td>
+            <button @click="viewProject(project.id)">View</button>
             <button @click="editProject(project.id)">Edit</button>
             <button @click="deleteProject(project.id)" style="margin-left: 5px;">Delete</button>
           </td>
@@ -32,13 +33,13 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 export default {
   setup() {
     const projects = ref([]);
 
-    // Fetch data dari API JSON Server
+
     
     const fetchProjects = async () => {
     try {
@@ -59,6 +60,12 @@ export default {
       window.location.href = `/projects/edit/${id}`;
     };
 
+    const viewProject = (id) => {
+      console.log(`Edit project ${id}`);
+      //alert(`Edit project ${id}`); // Gantilah dengan routing atau modal edit
+      window.location.href = `/projects/view/${id}`;
+    };
+
     // Aksi ketika klik Delete
     const deleteProject = async (id) => {
       if (!confirm(`Are you sure you want to delete project ${id}?`)) return;
@@ -73,9 +80,18 @@ export default {
       }
     };
 
+    const formatDate = (dateString) => {
+      if (!dateString) return "";
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, "0"); // 01-31
+      const monthAbbr = date.toLocaleString("en-US", { month: "short" }); // Jan, Feb, Mar, ...
+      const year = date.getFullYear(); // 2025
+      return `${day} ${monthAbbr} ${year}`; // Contoh output: 28 Feb 2025
+    };
+
     onMounted(fetchProjects);
 
-    return { projects, editProject, deleteProject };
+    return { projects, formatDate, viewProject, editProject, deleteProject };
   },
 };
 </script>

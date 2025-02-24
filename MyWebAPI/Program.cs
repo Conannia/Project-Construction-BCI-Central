@@ -58,6 +58,21 @@ app.MapPost("/users", async (ApplicationDbContext db, User user) =>
     return Results.Created($"/users/{user.Id}", user);
 });
 
+app.MapGet("/users/authenticate", async (ApplicationDbContext db, string email, string password) =>
+{
+    var user = await db.Users
+        .Where(u => u.Email == email && u.Password == password)
+        .FirstOrDefaultAsync();
+
+    if (user == null)
+    {
+        return Results.NotFound(new { message = "User tidak ditemukan atau password salah" });
+    }
+
+    return Results.Ok(new { userId = user.Id });
+});
+
+
 app.MapPost("/projects", async (ApplicationDbContext db, Project project) =>
 {
     db.Projects.Add(project);

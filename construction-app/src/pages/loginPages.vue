@@ -18,19 +18,31 @@ export default {
     };
   },
   methods: {
-    login() {
-      fetch(`http://localhost:3000/users?email=${this.email}&password=${this.password}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.length > 0) {
-            // Login sukses, redirect ke /projects/new
-            this.$router.push('/projects');
-          } else {
-            this.errorMessage = "Email atau password salah!";
-          }
-        })
-        .catch(error => console.error("Error:", error));
-    }
+  login() {
+    fetch(`http://localhost:5030/users/authenticate?email=${this.email}&password=${this.password}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Email atau password salah!");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.userId) {
+          // Simpan userId ke sessionStorage
+          sessionStorage.setItem("userId", data.userId);
+
+          // Redirect ke halaman projects
+          this.$router.push('/projects');
+        } else {
+          this.errorMessage = "Email atau password salah!";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        this.errorMessage = "Terjadi kesalahan saat login.";
+      });
   }
+}
+
 };
 </script>
