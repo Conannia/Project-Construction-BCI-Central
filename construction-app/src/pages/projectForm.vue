@@ -76,19 +76,34 @@ export default {
     }
 
     async function submitProject() {
-      const newProject = {
-        id: project.value.id,
-        name: project.value.name,
-        location: project.value.location,
-        stage: project.value.stage,
-        category:
-          project.value.category === "Others"
-            ? project.value.otherCategory
-            : project.value.category,
-        startDate: project.value.startDate,
-        details: project.value.details,
-        creatorId: project.value.creatorId,
-      };
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Hilangkan waktu agar hanya membandingkan tanggal
+
+    // Konversi startDate ke Date object
+    const startDate = new Date(project.value.startDate);
+    startDate.setHours(0, 0, 0, 0); // Hilangkan waktu
+
+    // Validasi stage yang memerlukan tanggal di masa depan
+    const futureStages = ["Concept", "Design", "PreConstruction"];
+
+    if (futureStages.includes(project.value.stage) && startDate <= today) {
+        alert("Construction Start Date must be in the future for Concept, Design, or PreConstruction stages.");
+        return; 
+    }
+
+  const newProject = {
+    id: project.value.id,
+    name: project.value.name,
+    location: project.value.location,
+    stage: project.value.stage,
+    category:
+      project.value.category === "Others"
+        ? project.value.otherCategory
+        : project.value.category,
+    startDate: project.value.startDate,
+    details: project.value.details,
+    creatorId: project.value.creatorId,
+  };
 
       try {
         await fetch("http://localhost:5030/projects", {
